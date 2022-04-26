@@ -12,13 +12,20 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "Role.exists",
+                query = "SELECT r FROM Role r WHERE r.name = :name"),
+        @NamedQuery(name = "Role.findByName",
+                query = "SELECT r FROM Role r LEFT JOIN FETCH r.users WHERE r.name = :name")
+})
+
 @Entity
 @EntityListeners(GeneralCreateUpdateListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, exclude = {"users"})
 public class Role extends BusinessEntity implements GrantedAuthority {
     @Column(unique = true, length = 250, nullable = false)
     private String name;
