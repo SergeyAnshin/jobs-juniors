@@ -24,7 +24,7 @@ Web application that allows juniors and employers to find each other. For employ
 
 ## Features
 
-* In progress
+* User registration
 
 # Installation
 
