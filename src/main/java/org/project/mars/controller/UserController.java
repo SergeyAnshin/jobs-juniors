@@ -1,9 +1,11 @@
 package org.project.mars.controller;
 
+import javax.validation.Valid;
 import org.project.mars.dto.RegisteringUser;
 import org.project.mars.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,13 +31,17 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(@ModelAttribute(ATTRIBUTE_USER) RegisteringUser registeringUser, Model model) {
-        boolean isRegistered = userService.signup(registeringUser);
-        if (isRegistered) {
-            return REDIRECT_TO_LOGIN_PAGE;
-        } else {
-            model.addAttribute(ATTRIBUTE_ERROR, "Already exists!");
+    public String signup(@ModelAttribute(ATTRIBUTE_USER) @Valid RegisteringUser registeringUser, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return PATH_SIGNUP_TEMPLATE;
+        } else {
+            boolean isRegistered = userService.signup(registeringUser);
+            if (isRegistered) {
+                return REDIRECT_TO_LOGIN_PAGE;
+            } else {
+                model.addAttribute(ATTRIBUTE_ERROR, "Already exists!");
+                return PATH_SIGNUP_TEMPLATE;
+            }
         }
     }
 }
