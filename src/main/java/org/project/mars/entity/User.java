@@ -12,6 +12,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 
+@NamedQueries({
+        @NamedQuery(name = "User.exists",
+                query = "SELECT u FROM User u WHERE u.username = :username OR u.email = :email"),
+        @NamedQuery(name = "User.findByUsername",
+                query = "SELECT u FROM User u WHERE u.username = :username")
+})
+
 @Entity
 @Table(name = "users")
 @EntityListeners(GeneralCreateUpdateListener.class)
