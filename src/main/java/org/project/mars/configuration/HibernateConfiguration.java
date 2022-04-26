@@ -1,6 +1,5 @@
 package org.project.mars.configuration;
 
-
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 @PropertySource({"classpath:datasource.properties", "classpath:hibernate.properties"})
 public class HibernateConfiguration {
     @Value("${datasource.driver}")
