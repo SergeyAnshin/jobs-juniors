@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "User.exists",
@@ -36,6 +38,9 @@ public class User extends BusinessEntity implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+    @ManyToMany
+    @JoinTable(name="users_roles")
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,5 +65,16 @@ public class User extends BusinessEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.getUsers().remove(this);
     }
 }
