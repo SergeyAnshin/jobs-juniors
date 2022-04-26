@@ -28,7 +28,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, exclude = {"roles"})
 public class User extends BusinessEntity implements UserDetails {
     private String firstName;
     private String lastName;
@@ -38,13 +38,14 @@ public class User extends BusinessEntity implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @ManyToMany
-    @JoinTable(name="users_roles")
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name="users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
