@@ -6,10 +6,7 @@ import org.project.mars.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static org.project.mars.controller.ExceptionHandlerController.ATTRIBUTE_ERROR;
 
@@ -18,6 +15,7 @@ import static org.project.mars.controller.ExceptionHandlerController.ATTRIBUTE_E
 public class UserController {
     public static final String ATTRIBUTE_USER = "user";
     public static final String PATH_SIGNUP_TEMPLATE = "user/signup";
+    public static final String PATH_LOGIN_TEMPLATE = "user/login";
     public static final String REDIRECT_TO_LOGIN_PAGE = "redirect:/user/login";
     private final UserService userService;
 
@@ -43,5 +41,13 @@ public class UserController {
                 return PATH_SIGNUP_TEMPLATE;
             }
         }
+    }
+
+    @GetMapping("/login")
+    public String getLoginTemplate(@RequestParam(required = false) boolean failed, Model model) {
+        if (failed) {
+            model.addAttribute(ATTRIBUTE_ERROR, "User doesn't exist!");
+        }
+        return PATH_LOGIN_TEMPLATE;
     }
 }
