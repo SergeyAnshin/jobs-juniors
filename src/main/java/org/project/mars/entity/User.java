@@ -7,18 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.project.mars.hibernatelistener.GeneralCreateUpdateListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NamedQueries({
         @NamedQuery(name = "User.exists",
                 query = "SELECT u FROM User u WHERE u.username = :username OR u.email = :email"),
         @NamedQuery(name = "User.findByUsername",
-                query = "SELECT u FROM User u WHERE u.username = :username")
+                query = "SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username")
 })
 
 @Entity
@@ -45,7 +47,9 @@ public class User extends BusinessEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+                .collect(Collectors.toList());
     }
 
     @Override
