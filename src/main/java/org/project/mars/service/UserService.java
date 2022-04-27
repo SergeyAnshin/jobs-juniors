@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
         if (userDAO.exists(user)) {
             return false;
         } else {
-            Optional<Role> roleUser = roleDAO.findByName("USER");
+            Optional<Role> roleUser = roleDAO.findByName(RoleName.USER.name());
             user.addRole(roleUser.get());
             userDAO.save(user);
             return true;
