@@ -47,4 +47,8 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User with this username doesn't exist!");
         }
     }
+
+    public Optional<User> findByIdWithResumes(long id) {
+        return userDAO.findByIdJoinResume(id);
+    }
 }
