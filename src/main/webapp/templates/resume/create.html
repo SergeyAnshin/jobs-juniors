@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>New resume</title>
+</head>
+<body>
+
+    <form action="#" th:action="@{/resume/create}" method="post" th:object="${resume}">
+
+        <div class="accordion" id="accordionExample">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        General information
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <label th:for="firstName">First name:</label>
+                        <input type="text" id="firstName" th:field="*{firstName}"/>
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</p>
+                        <br><br>
+
+                        <label th:for="lastName">Last name:</label>
+                        <input type="text" id="lastName" th:field="*{lastName}"/>
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</p>
+                        <br><br>
+
+                        <label th:for="email">Email:</label>
+                        <input type="text" id="email" th:field="*{email}"/>
+                        <br><br>
+                        <label th:for="telegram">Telegram:</label>
+                        <input type="text" id="telegram" th:field="*{telegramLink}"/>
+                        <br><br>
+                        <label th:for="phoneNumber">Phone number:</label>
+                        <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/>
+                        <br><br>
+                        <label th:for="linkedinLink">LinkedIn:</label>
+                        <input type="text" id="linkedinLink" th:field="*{linkedinLink}"/>
+                        <br><br>
+                        <label th:for="githubLink">GitHub:</label>
+                        <input type="text" id="githubLink" th:field="*{githubLink}"/>
+                        <br><br>
+                        <label th:for="location">Location:</label>
+                        <input type="text" id="location" th:field="*{location}"/>
+                        <br><br>
+
+                        <label th:for="desiredPosition">Desired position:</label>
+                        <input type="text" id="desiredPosition" th:field="*{desiredPosition}"/>
+                        <br><br>
+
+                        <label th:for="summary">Summary:</label>
+                        <input type="text" id="summary" th:field="*{summary}"/>
+                        <br><br>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Work experience
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                            <div th:each="option, rowStat : *{jobs}">
+
+                                <label th:for="companyName">Company:</label>
+                                <input type="text" id="companyName" th:field="*{jobs[__${rowStat.index}__].companyName}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].companyName')}" th:errors="*{jobs[__${rowStat.index}__].companyName}">Incorrect company</p>
+                                <br><br>
+
+                                <label th:for="companySite">Company site:</label>
+                                <input type="text" id="companySite" th:field="*{jobs[__${rowStat.index}__].companySite}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].companySite')}" th:errors="*{jobs[__${rowStat.index}__].companySite}">Incorrect company site</p>
+                                <br><br>
+
+                                <label th:for="positionName">Position:</label>
+                                <input type="text" id="positionName" th:field="*{jobs[__${rowStat.index}__].positionName}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].positionName')}" th:errors="*{jobs[__${rowStat.index}__].positionName}">Incorrect position</p>
+                                <br><br>
+
+                                <label th:for="employmentDate">Employment date:</label>
+                                <input type="date" id="employmentDate" th:field="*{jobs[__${rowStat.index}__].employmentDate}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].employmentDate')}" th:errors="*{jobs[__${rowStat.index}__].employmentDate}">Incorrect employment date</p>
+                                <br><br>
+
+                                <label th:for="dismissalDate">Dismissal date:</label>
+                                <input type="date" id="dismissalDate" th:field="*{jobs[__${rowStat.index}__].dismissalDate}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].dismissalDate')}" th:errors="*{jobs[__${rowStat.index}__].dismissalDate}">Incorrect dismissal date</p>
+                                <br><br>
+
+                                <label th:for="jobResponsibilities">Job responsibilities:</label>
+                                <input type="text" id="jobResponsibilities" th:field="*{jobs[__${rowStat.index}__].jobResponsibilities}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].jobResponsibilities')}" th:errors="*{jobs[__${rowStat.index}__].jobResponsibilities}">Incorrect job responsibilities</p>
+                                <br><br>
+
+                                <label th:for="jobAchievements">Job achievements:</label>
+                                <input type="text" id="jobAchievements" th:field="*{jobs[__${rowStat.index}__].jobAchievements}"/>
+                                <p th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].jobAchievements')}" th:errors="*{jobs[__${rowStat.index}__].jobAchievements}">Incorrect job achievements</p>
+                                <br><br>
+
+                                <button type="submit" name="indexJobInformation" th:value="${rowStat.index}">Remove job</button>
+
+                            </div>
+
+                        <button type="submit" name="addJobInformation" value="true">Add job</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Projects
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div th:each="option, rowStat : *{projectInformationList}">
+
+                            <label th:for="name">Name:</label>
+                            <input type="text" id="name" th:field="*{projectInformationList[__${rowStat.index}__].name}"/>
+                            <p th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].name')}" th:errors="*{projectInformationList[__${rowStat.index}__].name}">Incorrect project name</p>
+                            <br><br>
+
+                            <label th:for="description">Description:</label>
+                            <input type="text" id="description" th:field="*{projectInformationList[__${rowStat.index}__].description}"/>
+                            <p th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].description')}" th:errors="*{projectInformationList[__${rowStat.index}__].description}">Incorrect project description</p>
+                            <br><br>
+
+                            <label th:for="tasks">Tasks:</label>
+                            <input type="text" id="tasks" th:field="*{projectInformationList[__${rowStat.index}__].tasks}"/>
+                            <p th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].tasks')}" th:errors="*{projectInformationList[__${rowStat.index}__].tasks}">Incorrect project tasks</p>
+                            <br><br>
+
+                            <label th:for="stack">Stack:</label>
+                            <input type="text" id="stack" th:field="*{projectInformationList[__${rowStat.index}__].stack}"/>
+                            <p th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].stack')}" th:errors="*{projectInformationList[__${rowStat.index}__].stack}">Incorrect project stack</p>
+                            <br><br>
+
+                            <label th:for="link">Link:</label>
+                            <input type="text" id="link" th:field="*{projectInformationList[__${rowStat.index}__].link}"/>
+                            <p th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].link')}" th:errors="*{projectInformationList[__${rowStat.index}__].link}">Incorrect project link</p>
+                            <br><br>
+
+                            <button type="submit" name="indexProject" th:value="${rowStat.index}">Remove project</button>
+
+                        </div>
+
+                        <button type="submit" name="addProject" value="true">Add project</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Education
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div th:each="option, rowStat : *{educationInformationList}">
+
+                            <label th:for="educationalInstitution">Educational institution:</label>
+                            <input type="text" id="educationalInstitution" th:field="*{educationInformationList[__${rowStat.index}__].educationalInstitution}"/>
+                            <p th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].educationalInstitution')}" th:errors="*{educationInformationList[__${rowStat.index}__].educationalInstitution}">Incorrect educational institution</p>
+                            <br><br>
+
+                            <label th:for="faculty">Faculty:</label>
+                            <input type="text" id="faculty" th:field="*{educationInformationList[__${rowStat.index}__].faculty}"/>
+                            <p th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].faculty')}" th:errors="*{educationInformationList[__${rowStat.index}__].faculty}">Incorrect faculty</p>
+                            <br><br>
+
+                            <label th:for="specialization">Specialization:</label>
+                            <input type="text" id="specialization" th:field="*{educationInformationList[__${rowStat.index}__].specialization}"/>
+                            <p th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].specialization')}" th:errors="*{educationInformationList[__${rowStat.index}__].specialization}">Incorrect specialization</p>
+                            <br><br>
+
+                            <label th:for="enrollmentDate">Enrollment date:</label>
+                            <input type="date" id="enrollmentDate" th:field="*{educationInformationList[__${rowStat.index}__].enrollmentDate}"/>
+                            <p th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].enrollmentDate')}" th:errors="*{educationInformationList[__${rowStat.index}__].enrollmentDate}">Incorrect enrollment date</p>
+                            <br><br>
+
+                            <label th:for="graduationDate">Graduation date:</label>
+                            <input type="date" id="graduationDate" th:field="*{educationInformationList[__${rowStat.index}__].graduationDate}"/>
+                            <p th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].graduationDate')}" th:errors="*{educationInformationList[__${rowStat.index}__].graduationDate}">Incorrect graduation date</p>
+                            <br><br>
+
+                            <button type="submit" name="indexEducation" th:value="${rowStat.index}">Remove education</button>
+
+                        </div>
+
+                        <button type="submit" name="addEducation" value="true">Add education</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Courses
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div th:each="option, rowStat : *{courseInformationList}">
+
+                            <label th:for="courseName">Name:</label>
+                            <input type="text" id="courseName" th:field="*{courseInformationList[__${rowStat.index}__].name}"/>
+                            <p th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].name')}" th:errors="*{courseInformationList[__${rowStat.index}__].name">Incorrect course name</p>
+                            <br><br>
+
+                            <label th:for="courseOwner">Course owner:</label>
+                            <input type="text" id="courseOwner" th:field="*{courseInformationList[__${rowStat.index}__].courseOwner}"/>
+                            <p th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseOwner')}" th:errors="*{courseInformationList[__${rowStat.index}__].courseOwner">Incorrect course owner</p>
+                            <br><br>
+
+                            <label th:for="courseLink">Link:</label>
+                            <input type="text" id="courseLink" th:field="*{courseInformationList[__${rowStat.index}__].courseLink}"/>
+                            <p th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseLink')}" th:errors="*{courseInformationList[__${rowStat.index}__].courseLink">Incorrect course link</p>
+                            <br><br>
+
+                            <button type="submit" name="indexCourse" th:value="${rowStat.index}">Remove course</button>
+
+                        </div>
+
+                        <button type="submit" name="addCourse" value="true">Add course</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Skills
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div th:each="option, rowStat : *{skillInformationList}">
+
+                            <label th:for="skillName">Name:</label>
+                            <input type="text" id="skillName" th:field="*{skillInformationList[__${rowStat.index}__].name}"/>
+                            <p th:if="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')}" th:errors="*{skillInformationList[__${rowStat.index}__].name">Incorrect skill name</p>
+                            <br><br>
+
+                            <button type="submit" name="indexSkill" th:value="${rowStat.index}">Remove skill</button>
+
+                        </div>
+
+                        <button type="submit" name="addSkill" value="true">Add skill</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" name="save" th:value="true">Save</button>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
