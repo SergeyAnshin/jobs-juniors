@@ -19,7 +19,6 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring.version>5.3.19</spring.version>
     <spring-security.version>5.6.3</spring-security.version>
-    <thymeleaf.version>3.1.0.M1</thymeleaf.version>
   </properties>
 
   <dependencies>
@@ -45,12 +44,6 @@
       <artifactId>spring-security-config</artifactId>
       <version>${spring-security.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.thymeleaf.extras</groupId>
-      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-      <version>${thymeleaf.version}</version>
-    </dependency>
-
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -87,7 +80,12 @@
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring5</artifactId>
-      <version>${thymeleaf.version}</version>
+      <version>3.0.15.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+      <version>3.0.4.RELEASE</version>
     </dependency>
 
     <dependency>
