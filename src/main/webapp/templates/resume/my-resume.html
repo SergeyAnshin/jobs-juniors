@@ -3,11 +3,13 @@
 <head>
     <link th:insert="fragment/bootstrap.html :: style">
     <meta charset="UTF-8">
-    <title>Error page</title>
+    <title>My resume</title>
 </head>
 <body>
 
-    <p th:text="${error}"></p>
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <a class="btn btn-primary" href="/resume/create" role="button">Create</a>
 
     <div th:insert="fragment/bootstrap.html :: script"></div>
 </body>

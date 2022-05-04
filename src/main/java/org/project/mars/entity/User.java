@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
         @NamedQuery(name = "User.exists",
                 query = "SELECT u FROM User u WHERE u.username = :username OR u.email = :email"),
         @NamedQuery(name = "User.findByUsername",
-                query = "SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username")
+                query = "SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username"),
+        @NamedQuery(name = "User.findByIdJoinResume",
+                query = "SELECT u FROM User u LEFT JOIN FETCH u.resumes WHERE u.id = :id")
 })
 
 @Entity
@@ -44,6 +46,9 @@ public class User extends BusinessEntity implements UserDetails {
     @JoinTable(name="users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "owner")
+    private Set<Resume> resumes = new HashSet<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,5 +86,15 @@ public class User extends BusinessEntity implements UserDetails {
     public void removeRole(Role role) {
         roles.remove(role);
         role.getUsers().remove(this);
+    }
+
+    public void addResume(Resume resume) {
+        resumes.add(resume);
+        resume.setOwner(this);
+    }
+
+    public void removeResume(Resume resume) {
+        resumes.remove(resume);
+        resume.setOwner(null);
     }
 }

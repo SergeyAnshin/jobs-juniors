@@ -1,7 +1,9 @@
 package org.project.mars.controller;
 
 import org.project.mars.dto.*;
+import org.project.mars.entity.User;
 import org.project.mars.service.ResumeService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,17 @@ import javax.validation.Valid;
 public class ResumeController {
     public static final String ATTRIBUTE_RESUME = "resume";
     public static final String PATH_CREATE_RESUME_TEMPLATE = "resume/create";
+    public static final String PATH_MY_RESUME_TEMPLATE = "resume/my-resume";
     public static final String REDIRECT_TO_HOME_PAGE = "redirect:/";
     private final ResumeService resumeService;
 
     public ResumeController(ResumeService resumeService) {
         this.resumeService = resumeService;
+    }
+
+    @GetMapping
+    public String getMyResumeTemplate() {
+        return PATH_MY_RESUME_TEMPLATE;
     }
 
     @GetMapping("/create")
@@ -43,6 +51,8 @@ public class ResumeController {
             return PATH_CREATE_RESUME_TEMPLATE;
         } else {
             if (save) {
+                User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                resumeDTO.setOwnerId(user.getId());
                 resumeService.save(resumeDTO);
                 return REDIRECT_TO_HOME_PAGE;
             } else {

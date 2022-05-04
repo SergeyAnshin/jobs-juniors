@@ -35,6 +35,8 @@ public class Resume extends BusinessEntity {
     @JoinTable(name="resumes_skills", joinColumns = @JoinColumn(name = "resume_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<Skill> skills = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User owner;
 
 
     public void addSkill(Skill skill) {

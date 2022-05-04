@@ -3,6 +3,7 @@ package org.project.mars.dto;
 import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.project.mars.entity.User;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -39,4 +40,5 @@ public class ResumeDTO {
     private List<CourseInformation> courseInformationList = new ArrayList<>();
     @Valid
     private List<SkillInformation> skillInformationList = new ArrayList<>();
+    private long ownerId;
 }

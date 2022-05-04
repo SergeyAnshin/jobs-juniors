@@ -1,5 +1,6 @@
 package org.project.mars.configuration;
 
+import org.project.mars.enums.RoleName;
 import org.project.mars.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Value("${permit.all}")
     private String[] permitAllPatterns;
+    @Value("${permit.user}")
+    private String[] permitUserPatterns;
 
     public SecurityConfiguration(UserService userService) {
         this.userService = userService;
@@ -29,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers(permitAllPatterns).permitAll()
+                    .antMatchers(permitUserPatterns).hasAuthority(RoleName.USER.name())
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
