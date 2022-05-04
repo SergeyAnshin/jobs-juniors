@@ -15,11 +15,17 @@ import javax.validation.Valid;
 public class ResumeController {
     public static final String ATTRIBUTE_RESUME = "resume";
     public static final String PATH_CREATE_RESUME_TEMPLATE = "resume/create";
+    public static final String PATH_MY_RESUME_TEMPLATE = "resume/my-resume";
     public static final String REDIRECT_TO_HOME_PAGE = "redirect:/";
     private final ResumeService resumeService;
 
     public ResumeController(ResumeService resumeService) {
         this.resumeService = resumeService;
+    }
+
+    @GetMapping
+    public String getMyResumeTemplate() {
+        return PATH_MY_RESUME_TEMPLATE;
     }
 
     @GetMapping("/create")
