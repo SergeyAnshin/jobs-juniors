@@ -23,4 +23,5 @@ public class Project extends BusinessEntity {
     private String tasks;
     private String stack;
     private String link;
+    private boolean openSource;
 }

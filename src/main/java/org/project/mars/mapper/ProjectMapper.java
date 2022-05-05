@@ -19,6 +19,7 @@ public class ProjectMapper {
                     .tasks(projectInformation.getTasks())
                     .stack(projectInformation.getStack())
                     .link(projectInformation.getLink())
+                    .openSource(projectInformation.isOpenSource())
                     .build();
         }
     }

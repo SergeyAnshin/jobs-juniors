@@ -26,4 +26,5 @@ public class ProjectInformation {
     @NotEmpty
     @NotBlank
     private String link;
+    private boolean openSource;
 }
