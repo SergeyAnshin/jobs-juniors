@@ -9,6 +9,15 @@ import org.project.mars.hibernatelistener.GeneralCreateUpdateListener;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries({
+        @NamedQuery(name = "Project.exists",
+                query = "SELECT p FROM Project p WHERE p.link = :link"),
+        @NamedQuery(name = "Project.findAllByOpenSource",
+                query = "SELECT p FROM Project p WHERE p.openSource = true")
+})
 
 @Entity
 @EntityListeners(GeneralCreateUpdateListener.class)
