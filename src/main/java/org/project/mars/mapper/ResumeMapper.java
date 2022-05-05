@@ -13,7 +13,7 @@ public class ResumeMapper {
             return Resume.builder()
                     .generalInformation(GeneralInformationMapper.mapFromResumeDTO(resumeDTO))
                     .workExperience(JobMapper.mapFromJobInformationList(resumeDTO.getJobs()))
-                    .projects(ProjectMapper.mapFromProjectInformationList(resumeDTO.getProjectInformationList()))
+                    .projects(ProjectMapper.mapFromProjectInformationSet(resumeDTO.getProjectInformationList()))
                     .education(EducationMapper.mapFromEducationInformationList(resumeDTO.getEducationInformationList()))
                     .courses(CourseMapper.mapFromCourseInformationList(resumeDTO.getCourseInformationList()))
                     .skills(SkillMapper.mapFromSkillInformationList(resumeDTO.getSkillInformationList()))
