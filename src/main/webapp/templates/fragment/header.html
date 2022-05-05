@@ -11,6 +11,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/project/open-source">Open source</a>
                         <a sec:authorize="hasAuthority('USER')" class="nav-link" href="/resume">My resume</a>
                         <a sec:authorize="isAuthenticated() == false" class="nav-link" href="/user/signup">Sign up</a>
                         <a sec:authorize="isAuthenticated() == false" class="nav-link" href="/user/login">Log in</a>
