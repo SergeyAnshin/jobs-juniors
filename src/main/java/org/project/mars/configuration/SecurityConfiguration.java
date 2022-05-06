@@ -1,6 +1,7 @@
 package org.project.mars.configuration;
 
 import org.project.mars.enums.RoleName;
+import org.project.mars.service.AccountService;
 import org.project.mars.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +17,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @PropertySource("classpath:securitypattern.properties")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private AccountService accountService;
     @Value("${permit.all}")
     private String[] permitAllPatterns;
     @Value("${permit.user}")
     private String[] permitUserPatterns;
 
-    public SecurityConfiguration(UserService userService) {
-        this.userService = userService;
+    public SecurityConfiguration(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Override
@@ -36,13 +37,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/user/login")
-                    .usernameParameter("username").passwordParameter("password")
-                    .failureUrl("/user/login?failed=true")
+                    .loginPage("/account/login")
+                    .usernameParameter("email").passwordParameter("password")
+                    .failureUrl("/account/login?failed=true")
                     .and()
                 .logout()
-                    .logoutUrl("/user/logout")
-                    .logoutSuccessUrl("/user/login")
+                    .logoutUrl("/account/logout")
+                    .logoutSuccessUrl("/account/login")
                     .invalidateHttpSession(true);
     }
 
@@ -53,6 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(accountService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

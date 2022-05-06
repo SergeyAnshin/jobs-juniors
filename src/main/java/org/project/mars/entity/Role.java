@@ -15,8 +15,10 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "Role.exists",
                 query = "SELECT r FROM Role r WHERE r.name = :name"),
-        @NamedQuery(name = "Role.findByName",
-                query = "SELECT r FROM Role r LEFT JOIN FETCH r.users WHERE r.name = :name")
+        @NamedQuery(name = "Role.findByNameJoinUser",
+                query = "SELECT r FROM Role r LEFT JOIN FETCH r.users WHERE r.name = :name"),
+        @NamedQuery(name = "Role.findByNameJoinEmployer",
+                query = "SELECT r FROM Role r LEFT JOIN FETCH r.employers WHERE r.name = :name")
 })
 
 @Entity
@@ -25,12 +27,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = false, exclude = {"users"})
+@EqualsAndHashCode(callSuper = false, exclude = {"users", "employers"})
 public class Role extends BusinessEntity implements GrantedAuthority {
     @Column(unique = true, length = 250, nullable = false)
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private Set<Employer> employers = new HashSet<>();
 
     @Override
     public String getAuthority() {

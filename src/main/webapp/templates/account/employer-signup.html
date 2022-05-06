@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <form action="#" th:action="@{/user/signup}" method="post" th:object="${user}">
+    <form action="#" th:action="@{/account/signup/employer}" method="post" th:object="${employer}">
 
         <p th:if="${error} != null" th:text="${error}">Error</p>
 
@@ -21,10 +21,9 @@
         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</p>
         <br><br>
 
-
-        <label th:for="username">Username:</label>
-        <input type="text" id="username" th:field="*{username}"/>
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect username</p>
+        <label th:for="phoneNumber">Phone number:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/>
+        <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Incorrect phone number</p>
         <br><br>
 
         <label th:for="email">Email:</label>
@@ -32,15 +31,16 @@
         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</p>
         <br><br>
 
-        <label th:for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}"/>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
+        <label th:for="companyName">Company name:</label>
+        <input type="text" id="companyName" th:field="*{companyName}"/>
+        <p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">Incorrect company name</p>
         <br><br>
 
-        <input type="submit"/>
+        <button class="btn btn-primary" type="submit">Submit</button>
 
     </form>
 
     <div th:insert="fragment/bootstrap.html :: script"></div>
+
 </body>
 </html>

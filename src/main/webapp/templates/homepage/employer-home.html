@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Employer home</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/">Home</a>
+                    <a sec:authorize="isAuthenticated() == false" class="nav-link" href="/account/signup/employer">Sign up</a>
+                    <a sec:authorize="isAuthenticated() == false" class="nav-link" href="/account/login">Log in</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/account/logout">Log out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+</body>
+</html>

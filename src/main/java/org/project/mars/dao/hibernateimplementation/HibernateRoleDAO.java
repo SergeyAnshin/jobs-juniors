@@ -35,9 +35,19 @@ public class HibernateRoleDAO implements RoleDAO {
     }
 
     @Override
-    public Optional<Role> findByName(String name) {
+    public Optional<Role> findByNameJoinUser(String name) {
         Session session = sessionFactory.openSession();
-        Query<Role> namedQuery = session.createNamedQuery("Role.findByName", Role.class);
+        Query<Role> namedQuery = session.createNamedQuery("Role.findByNameJoinUser", Role.class);
+        namedQuery.setParameter("name", name);
+        Optional<Role> foundRole = namedQuery.uniqueResultOptional();
+        session.close();
+        return foundRole;
+    }
+
+    @Override
+    public Optional<Role> findByNameJoinEmployer(String name) {
+        Session session = sessionFactory.openSession();
+        Query<Role> namedQuery = session.createNamedQuery("Role.findByNameJoinEmployer", Role.class);
         namedQuery.setParameter("name", name);
         Optional<Role> foundRole = namedQuery.uniqueResultOptional();
         session.close();

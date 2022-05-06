@@ -6,13 +6,17 @@ import org.project.mars.hibernatelistener.GeneralCreateUpdateListener;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "Company.exists",
                 query = "SELECT c FROM Company c WHERE c.name = :name"),
         @NamedQuery(name = "Company.findAllByNameContainingIn",
-                query = "SELECT c FROM Company c LEFT JOIN FETCH c.jobs WHERE c.name IN (:names)")
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.jobs WHERE c.name IN (:names)"),
+        @NamedQuery(name = "Company.findByNameJoinEmployer",
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.employers WHERE c.name = :name")
 })
 
 @Entity
@@ -28,7 +32,8 @@ public class Company extends BusinessEntity {
     private String site;
     @OneToMany(mappedBy = "company")
     private List<Job> jobs = new ArrayList<>();
-
+    @OneToMany(mappedBy = "company")
+    private Set<Employer> employers = new HashSet<>();
 
     public void addJob(Job job) {
         jobs.add(job);
@@ -38,5 +43,15 @@ public class Company extends BusinessEntity {
     public void removeJob(Job job) {
         jobs.remove(job);
         job.setCompany(null);
+    }
+
+    public void addEmployer(Employer employer) {
+        employers.add(employer);
+        employer.setCompany(this);
+    }
+
+    public void removeEmployer(Employer employer) {
+        employers.remove(employer);
+        employer.setCompany(null);
     }
 }
