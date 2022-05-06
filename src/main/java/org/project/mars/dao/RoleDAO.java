@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface RoleDAO extends BusinessEntityDAO<Role> {
 
-    Optional<Role> findByName(String name);
+    Optional<Role> findByNameJoinUser(String name);
+
+    Optional<Role> findByNameJoinEmployer(String name);
 }
