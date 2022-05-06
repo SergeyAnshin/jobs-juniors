@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Log in</title>
+</head>
+<body>
+
+    <form action="#" th:action="@{/account/login}" method="post">
+
+        <p th:if="${error} != null" th:text="${error}">Error</p>
+
+        <label th:for="email">Email:</label>
+        <input type="text" id="email" name="email"/>
+        <br><br>
+
+        <label th:for="password">Password:</label>
+        <input type="password" id="password" name="password"/>
+        <br><br>
+
+        <input type="submit"/>
+
+    </form>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+
+</body>
+</html>
