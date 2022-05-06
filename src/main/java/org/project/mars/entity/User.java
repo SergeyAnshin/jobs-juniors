@@ -22,7 +22,9 @@ import java.util.stream.Collectors;
         @NamedQuery(name = "User.findByUsername",
                 query = "SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username"),
         @NamedQuery(name = "User.findByIdJoinResume",
-                query = "SELECT u FROM User u LEFT JOIN FETCH u.resumes WHERE u.id = :id")
+                query = "SELECT u FROM User u LEFT JOIN FETCH u.resumes WHERE u.id = :id"),
+        @NamedQuery(name = "User.findByEmail",
+                query = "SELECT u FROM User u JOIN FETCH u.roles WHERE u.email = :email")
 })
 
 @Entity

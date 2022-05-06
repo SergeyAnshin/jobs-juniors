@@ -36,20 +36,20 @@ public class HibernateUserDAO implements UserDAO {
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByIdJoinResume(long id) {
         Session session = sessionFactory.openSession();
-        Query<User> namedQuery = session.createNamedQuery("User.findByUsername", User.class);
-        namedQuery.setParameter("username", username);
+        Query<User> namedQuery = session.createNamedQuery("User.findByIdJoinResume", User.class);
+        namedQuery.setParameter("id", id);
         Optional<User> user = namedQuery.uniqueResultOptional();
         session.close();
         return user;
     }
 
     @Override
-    public Optional<User> findByIdJoinResume(long id) {
+    public Optional<User> findByEmail(String email) {
         Session session = sessionFactory.openSession();
-        Query<User> namedQuery = session.createNamedQuery("User.findByIdJoinResume", User.class);
-        namedQuery.setParameter("id", id);
+        Query<User> namedQuery = session.createNamedQuery("User.findByEmail", User.class);
+        namedQuery.setParameter("email", email);
         Optional<User> user = namedQuery.uniqueResultOptional();
         session.close();
         return user;

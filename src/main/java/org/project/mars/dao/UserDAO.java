@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface UserDAO extends BusinessEntityDAO<User> {
 
-    Optional<User> findByUsername(String username);
-
     Optional<User> findByIdJoinResume(long id);
+
+    Optional<User> findByEmail(String email);
 }
