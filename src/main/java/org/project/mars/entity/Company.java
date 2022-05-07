@@ -16,7 +16,9 @@ import java.util.Set;
         @NamedQuery(name = "Company.findAllByNameContainingIn",
                 query = "SELECT c FROM Company c LEFT JOIN FETCH c.jobs WHERE c.name IN (:names)"),
         @NamedQuery(name = "Company.findByNameJoinEmployer",
-                query = "SELECT c FROM Company c LEFT JOIN FETCH c.employers WHERE c.name = :name")
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.employers WHERE c.name = :name"),
+        @NamedQuery(name = "Company.findByNameJoinInternship",
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.internships WHERE c.name = :name")
 })
 
 @Entity
@@ -34,6 +36,8 @@ public class Company extends BusinessEntity {
     private List<Job> jobs = new ArrayList<>();
     @OneToMany(mappedBy = "company")
     private Set<Employer> employers = new HashSet<>();
+    @OneToMany(mappedBy = "company")
+    private Set<Internship> internships = new HashSet<>();
 
     public void addJob(Job job) {
         jobs.add(job);
@@ -53,5 +57,15 @@ public class Company extends BusinessEntity {
     public void removeEmployer(Employer employer) {
         employers.remove(employer);
         employer.setCompany(null);
+    }
+
+    public void addInternship(Internship internship) {
+        internships.add(internship);
+        internship.setCompany(this);
+    }
+
+    public void removeInternship(Internship internship) {
+        internships.remove(internship);
+        internship.setCompany(null);
     }
 }
