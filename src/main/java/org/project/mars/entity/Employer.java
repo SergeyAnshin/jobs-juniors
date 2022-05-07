@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
         @NamedQuery(name = "Employer.exists",
                 query = "SELECT e FROM Employer e WHERE e.email = :email"),
         @NamedQuery(name = "Employer.findByEmail",
-                query = "SELECT e FROM Employer e JOIN FETCH e.roles WHERE e.email = :email")
+                query = "SELECT e FROM Employer e JOIN FETCH e.roles JOIN FETCH e.company WHERE e.email = :email")
 })
 
 @Entity

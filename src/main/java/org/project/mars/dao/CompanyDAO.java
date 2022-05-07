@@ -10,4 +10,6 @@ public interface CompanyDAO extends BusinessEntityDAO<Company> {
     List<Company> findAllByNameContainingIn(List<String> companyNames);
 
     Optional<Company> findByNameJoinEmployer(String name);
+
+    Optional<Company> findByNameJoinInternship(String name);
 }

@@ -73,7 +73,7 @@ public class AccountService implements UserDetailsService {
         } else {
             Optional<Employer> employer = employerDAO.findByEmail(email);
             if (employer.isPresent()) {
-                return employer.get();
+                return EmployerMapper.mapToUserDetails(employer.get());
             } else {
                 throw new UsernameNotFoundException("User with this username doesn't exist!");
             }
