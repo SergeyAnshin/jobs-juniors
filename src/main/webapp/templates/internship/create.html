@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>New internship</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <form action="#" th:action="@{/internship/create}" method="post" th:object="${internship}">
+
+        <p th:if="${error} != null" th:text="${error}">Error</p>
+
+        <label th:for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}"/>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+        <br><br>
+
+        <label th:for="technology">Technology:</label>
+        <input type="text" id="technology" th:field="*{technology}"/>
+        <p th:if="${#fields.hasErrors('technology')}" th:errors="*{technology}">Incorrect technology</p>
+        <br><br>
+
+        <label th:for="startDate">Start date:</label>
+        <input type="date" id="startDate" th:field="*{startDate}"/>
+        <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">Incorrect start date</p>
+        <br><br>
+
+        <label th:for="finishDate">Finish date:</label>
+        <input type="date" id="finishDate" th:field="*{finishDate}"/>
+        <p th:if="${#fields.hasErrors('finishDate')}" th:errors="*{finishDate}">Incorrect finish date</p>
+        <br><br>
+
+        <label th:for="description">Description:</label>
+        <input type="text" id="description" th:field="*{description}"/>
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Incorrect description</p>
+        <br><br>
+
+        <label th:for="stack">Stack:</label>
+        <input type="text" id="stack" th:field="*{stack}"/>
+        <p th:if="${#fields.hasErrors('stack')}" th:errors="*{stack}">Incorrect stack</p>
+        <br><br>
+
+        <label th:for="requirements">Requirements:</label>
+        <input type="text" id="requirements" th:field="*{requirements}"/>
+        <p th:if="${#fields.hasErrors('requirements')}" th:errors="*{requirements}">Incorrect requirements</p>
+        <br><br>
+
+        <label th:for="contact">Contact:</label>
+        <input type="text" id="contact" th:field="*{contact}"/>
+        <p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">Incorrect contact</p>
+        <br><br>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+
+    </form>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+</body>
+</html>
