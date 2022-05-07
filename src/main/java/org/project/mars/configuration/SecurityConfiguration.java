@@ -22,6 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private String[] permitAllPatterns;
     @Value("${permit.user}")
     private String[] permitUserPatterns;
+    @Value("${permit.employer}")
+    private String[] permitEmployerPatterns;
 
     public SecurityConfiguration(AccountService accountService) {
         this.accountService = accountService;
@@ -34,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(permitAllPatterns).permitAll()
                     .antMatchers(permitUserPatterns).hasAuthority(RoleName.USER.name())
+                    .antMatchers(permitEmployerPatterns).hasAuthority(RoleName.EMPLOYER.name())
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
