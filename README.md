@@ -24,7 +24,10 @@ Web application that allows juniors and employers to find each other. For employ
 
 ## Features
 
-* User registration
+* User and employer registration, authentication and authorization
+* Create resume
+* Create internship
+* View open source project
 
 # Installation
 
