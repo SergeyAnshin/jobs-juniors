@@ -18,7 +18,9 @@ import java.util.Set;
         @NamedQuery(name = "Company.findByNameJoinEmployer",
                 query = "SELECT c FROM Company c LEFT JOIN FETCH c.employers WHERE c.name = :name"),
         @NamedQuery(name = "Company.findByNameJoinInternship",
-                query = "SELECT c FROM Company c LEFT JOIN FETCH c.internships WHERE c.name = :name")
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.internships WHERE c.name = :name"),
+        @NamedQuery(name = "Company.findByNameJoinVacancy",
+                query = "SELECT c FROM Company c LEFT JOIN FETCH c.vacancies WHERE c.name = :name")
 })
 
 @Entity

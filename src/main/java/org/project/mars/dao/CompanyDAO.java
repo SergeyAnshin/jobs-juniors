@@ -12,4 +12,6 @@ public interface CompanyDAO extends BusinessEntityDAO<Company> {
     Optional<Company> findByNameJoinEmployer(String name);
 
     Optional<Company> findByNameJoinInternship(String name);
+
+    Optional<Company> findByNameJoinVacancy(String name);
 }
