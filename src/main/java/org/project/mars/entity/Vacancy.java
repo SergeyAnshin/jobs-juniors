@@ -11,6 +11,14 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "Vacancy.exists",
+                query = "SELECT v FROM Vacancy v WHERE v.name = :name AND v.salary = :salary " +
+                        "AND v.requiredExperience = :requiredExperience AND v.aboutProject = :aboutProject " +
+                        "AND v.requirements = :requirements AND v.responsibilities = :responsibilities " +
+                        "AND v.company.name = :companyName")
+})
+
 @Entity
 @EntityListeners(GeneralCreateUpdateListener.class)
 @Data
