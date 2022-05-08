@@ -27,6 +27,8 @@ public class Skill extends BusinessEntity {
     private String name;
     @ManyToMany(mappedBy = "skills")
     private List<Resume> resumes = new ArrayList<>();
+    @ManyToMany(mappedBy = "skills")
+    private List<Vacancy> vacancies = new ArrayList<>();
 
     public void addResume(Resume resume) {
         resumes.add(resume);

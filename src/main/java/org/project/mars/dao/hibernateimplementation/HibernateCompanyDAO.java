@@ -64,4 +64,14 @@ public class HibernateCompanyDAO implements CompanyDAO {
         session.close();
         return foundCompany;
     }
+
+    @Override
+    public Optional<Company> findByNameJoinVacancy(String name) {
+        Session session = sessionFactory.openSession();
+        Query<Company> namedQuery = session.createNamedQuery("Company.findByNameJoinVacancy", Company.class);
+        namedQuery.setParameter("name", name);
+        Optional<Company> foundCompany = namedQuery.uniqueResultOptional();
+        session.close();
+        return foundCompany;
+    }
 }

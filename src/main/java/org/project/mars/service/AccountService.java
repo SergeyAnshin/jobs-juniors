@@ -13,6 +13,8 @@ import org.project.mars.entity.User;
 import org.project.mars.enums.RoleName;
 import org.project.mars.mapper.EmployerMapper;
 import org.project.mars.mapper.UserMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -78,5 +80,10 @@ public class AccountService implements UserDetailsService {
                 throw new UsernameNotFoundException("User with this username doesn't exist!");
             }
         }
+    }
+
+    public static Employer getEmployerFromSecurityContext() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (Employer) authentication.getPrincipal();
     }
 }
