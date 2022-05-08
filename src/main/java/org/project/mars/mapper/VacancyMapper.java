@@ -2,16 +2,7 @@ package org.project.mars.mapper;
 
 import org.project.mars.dto.VacancyDetails;
 import org.project.mars.entity.Company;
-import org.project.mars.entity.Skill;
-import org.project.mars.entity.User;
 import org.project.mars.entity.Vacancy;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import java.util.HashSet;
-import java.util.Set;
 
 public class VacancyMapper {
 
@@ -33,7 +24,7 @@ public class VacancyMapper {
                     .additionalInformation(vacancyDetails.getAdditionalInformation())
                     .skills(SkillMapper.mapFromSkillInformationList(vacancyDetails.getSkillInformationList()))
                     .company(Company.builder()
-                            .name(vacancyDetails.getName())
+                            .name(vacancyDetails.getCompanyName())
                             .build())
                     .build();
         }
