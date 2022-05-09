@@ -37,9 +37,7 @@ public class VacancyController {
                                 @RequestParam(required = false) boolean addSkill,
                                 @RequestParam(required = false) String indexSkill) {
         vacancyDetails.setCompanyName(AccountService.getEmployerFromSecurityContext().getCompany().getName());
-        if (bindingResult.hasErrors()) {
-            return PATH_CREATE_VACANCY_TEMPLATE;
-        } else {
+        if (!bindingResult.hasErrors()) {
             if (save) {
                 if (vacancyService.save(vacancyDetails)) {
                     return PATH_COMPANY_VACANCY_TEMPLATE;
@@ -47,16 +45,15 @@ public class VacancyController {
                     model.addAttribute(ATTRIBUTE_ERROR, "Already exists!");
                     return PATH_CREATE_VACANCY_TEMPLATE;
                 }
-            } else {
-                if (addSkill) {
-                    vacancyDetails.getSkillInformationList().add(new SkillInformation());
-                }
-                if (indexSkill != null) {
-                    vacancyDetails.getSkillInformationList().remove(Integer.parseInt(indexSkill));
-                }
-                return PATH_CREATE_VACANCY_TEMPLATE;
             }
         }
+        if (addSkill) {
+            vacancyDetails.getSkillInformationList().add(new SkillInformation());
+        }
+        if (indexSkill != null) {
+            vacancyDetails.getSkillInformationList().remove(Integer.parseInt(indexSkill));
+        }
+        return PATH_CREATE_VACANCY_TEMPLATE;
     }
 
     @GetMapping("/company-vacancy")
