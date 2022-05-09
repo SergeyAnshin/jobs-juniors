@@ -24,3 +24,9 @@ INSERT INTO position_table(creationDateTime, updateDateTime, name) VALUE (NOW(),
 # EMPLOYERS
 INSERT INTO employer(creationDateTime, updateDateTime, email, firstName, lastName, password, phoneNumber, company_id) VALUE (NOW(), NOW(), 'em@gmail.com', 'em', 'em', '$2a$12$tEGY3Cz9/aCv78qWm9rStet0O9Py56lrRTC..fhmiSh87.wERho8K', '+375330001122', 1);
 INSERT INTO employers_roles(employer_id, role_id) VALUE (1, 4);
+
+# GENERAL INFORMATION
+INSERT INTO generalinformation(creationDateTime, updateDateTime, desiredPosition, firstName, lastName, summary) VALUE (NOW(), NOW(), 'Java dev', 'Tom', 'Ford', 'Summary');
+
+# RESUMES
+INSERT INTO resume(creationDateTime, updateDateTime, general_information_id, owner_id) VALUE (NOW(), NOW(), 1, 1);

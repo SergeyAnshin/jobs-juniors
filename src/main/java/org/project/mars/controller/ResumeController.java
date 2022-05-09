@@ -47,47 +47,45 @@ public class ResumeController {
                                          @RequestParam(required = false) String indexCourse,
                                          @RequestParam(required = false) boolean addSkill,
                                          @RequestParam(required = false) String indexSkill) {
-        if (bindingResult.hasErrors()) {
-            return PATH_CREATE_RESUME_TEMPLATE;
-        } else {
+        if (!bindingResult.hasErrors()) {
             if (save) {
                 User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 resumeDTO.setOwnerId(user.getId());
+                System.out.println(user.getId());
                 resumeService.save(resumeDTO);
                 return REDIRECT_TO_HOME_PAGE;
-            } else {
-                if (addJobInformation) {
-                    resumeDTO.getJobs().add(new JobInformation());
-                }
-                if (indexJobInformation != null) {
-                    resumeDTO.getJobs().remove(Integer.parseInt(indexJobInformation));
-                }
-                if (addProject) {
-                    resumeDTO.getProjectInformationList().add(new ProjectInformation());
-                }
-                if (indexProject != null) {
-                    resumeDTO.getProjectInformationList().remove(Integer.parseInt(indexProject));
-                }
-                if (addEducation) {
-                    resumeDTO.getEducationInformationList().add(new EducationInformation());
-                }
-                if (indexEducation != null) {
-                    resumeDTO.getEducationInformationList().remove(Integer.parseInt(indexEducation));
-                }
-                if (addCourse) {
-                    resumeDTO.getCourseInformationList().add(new CourseInformation());
-                }
-                if (indexCourse != null) {
-                    resumeDTO.getCourseInformationList().remove(Integer.parseInt(indexCourse));
-                }
-                if (addSkill) {
-                    resumeDTO.getSkillInformationList().add(new SkillInformation());
-                }
-                if (indexSkill != null) {
-                    resumeDTO.getSkillInformationList().remove(Integer.parseInt(indexSkill));
-                }
-                return PATH_CREATE_RESUME_TEMPLATE;
             }
         }
+        if (addJobInformation) {
+            resumeDTO.getJobs().add(new JobInformation());
+        }
+        if (indexJobInformation != null) {
+            resumeDTO.getJobs().remove(Integer.parseInt(indexJobInformation));
+        }
+        if (addProject) {
+            resumeDTO.getProjectInformationList().add(new ProjectInformation());
+        }
+        if (indexProject != null) {
+            resumeDTO.getProjectInformationList().remove(Integer.parseInt(indexProject));
+        }
+        if (addEducation) {
+            resumeDTO.getEducationInformationList().add(new EducationInformation());
+        }
+        if (indexEducation != null) {
+            resumeDTO.getEducationInformationList().remove(Integer.parseInt(indexEducation));
+        }
+        if (addCourse) {
+            resumeDTO.getCourseInformationList().add(new CourseInformation());
+        }
+        if (indexCourse != null) {
+            resumeDTO.getCourseInformationList().remove(Integer.parseInt(indexCourse));
+        }
+        if (addSkill) {
+            resumeDTO.getSkillInformationList().add(new SkillInformation());
+        }
+        if (indexSkill != null) {
+            resumeDTO.getSkillInformationList().remove(Integer.parseInt(indexSkill));
+        }
+        return PATH_CREATE_RESUME_TEMPLATE;
     }
 }

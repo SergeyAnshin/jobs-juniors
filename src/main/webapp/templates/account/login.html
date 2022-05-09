@@ -7,21 +7,55 @@
 </head>
 <body>
 
-    <form action="#" th:action="@{/account/login}" method="post">
+    <div class="container">
 
-        <p th:if="${error} != null" th:text="${error}">Error</p>
+        <div class="row mt-4">
+            <p class="text-danger text-center mb-3 mt-3" th:if="${error} != null" th:text="${error}">Error</p>
+        </div>
 
-        <label th:for="email">Email:</label>
-        <input type="text" id="email" name="email"/>
-        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <form action="#" th:action="@{/account/login}" method="post">
 
-        <label th:for="password">Password:</label>
-        <input type="password" id="password" name="password"/>
-        <br><br>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Login</label>
+                        <input class="form-control" type="text" id="email" name="email" required/>
+                    </div>
 
-        <input type="submit"/>
+                    <div class="mb-1">
+                        <label for="password" class="form-label">Password</label>
+                        <input class="form-control" type="password" id="password" name="password" required/>
+                    </div>
 
-    </form>
+                    <div class="mb-3">
+                        <p class="text-end">
+                            <a href="/account/password-reset" class="text-decoration-none text-sm text-dark" >
+                                Forgot your password?
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+
+                    <div class="mb-1">
+                        <p class="text-center">
+                            <a href="/account/signup/user" class="text-reset">Sign up</a>
+                            if you don't have an account yet.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-center">
+                            <a href="/account/signup/employer" class="text-reset">Sign up</a>
+                            if you are an employer.
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div th:insert="fragment/bootstrap.html :: script"></div>
 

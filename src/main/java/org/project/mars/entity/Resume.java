@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, exclude = "owner")
 public class Resume extends BusinessEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "general_information_id")
