@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class GeneralInformation extends BusinessEntity {
     private String firstName;
     private String lastName;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "contact_information_id")
     private ContactInformation contactInformation;
     private String desiredPosition;
