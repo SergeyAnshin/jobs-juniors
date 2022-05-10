@@ -2,9 +2,11 @@ package org.project.mars.controller;
 
 import org.project.mars.dto.*;
 import org.project.mars.entity.User;
+import org.project.mars.service.AccountService;
 import org.project.mars.service.ResumeService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +16,11 @@ import javax.validation.Valid;
 @RequestMapping("/resume")
 public class ResumeController {
     public static final String ATTRIBUTE_RESUME = "resume";
+    public static final String ATTRIBUTE_RESUMES = "resumes";
     public static final String PATH_CREATE_RESUME_TEMPLATE = "resume/create";
     public static final String PATH_MY_RESUME_TEMPLATE = "resume/my-resume";
     public static final String REDIRECT_TO_HOME_PAGE = "redirect:/";
+    public static final String REDIRECT_TO_RESUME_PAGE = "redirect:/resume";
     private final ResumeService resumeService;
 
     public ResumeController(ResumeService resumeService) {
@@ -24,7 +28,9 @@ public class ResumeController {
     }
 
     @GetMapping
-    public String getMyResumeTemplate() {
+    public String getMyResumeTemplate(Model model) {
+        User user = AccountService.getUserFromSecurityContext();
+        model.addAttribute(ATTRIBUTE_RESUMES, resumeService.findAllByUser(user));
         return PATH_MY_RESUME_TEMPLATE;
     }
 
@@ -87,5 +93,11 @@ public class ResumeController {
             resumeDTO.getSkillInformationList().remove(Integer.parseInt(indexSkill));
         }
         return PATH_CREATE_RESUME_TEMPLATE;
+    }
+
+    @PostMapping("/delete")
+    public String deleteResume(@RequestParam long resumeId) {
+        resumeService.deleteById(resumeId);
+        return REDIRECT_TO_RESUME_PAGE;
     }
 }
