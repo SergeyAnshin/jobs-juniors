@@ -42,6 +42,7 @@ INSERT INTO contactinformation(creationDateTime, updateDateTime, email, githubLi
 
 INSERT INTO contactinformation(creationDateTime, updateDateTime, email, location, phoneNumber) VALUE (NOW(), NOW(), 'bob@gmail.com', 'Orsha', '+375 (29) 999-99-99');
 INSERT INTO contactinformation(creationDateTime, updateDateTime, email, githubLink, linkedinLink, location, phoneNumber, telegramLink) VALUE (NOW(), NOW(), 'bob@gmail.com', 'https://github.com/BigBob', 'https://www.linkedin.com/in/BigBob', 'Orsha', '+375 (29) 999-99-99', 'https://t.me/BigBob');
+INSERT INTO contactinformation(creationDateTime, updateDateTime, linkedinLink, location, phoneNumber, telegramLink) VALUE (NOW(), NOW(), 'https://www.linkedin.com/in/BigBob', 'Orsha', '+375 (29) 999-99-99', 'https://t.me/BigBob');
 
 # GENERAL INFORMATION
 INSERT INTO generalinformation(creationDateTime, updateDateTime, desiredPosition, firstName, lastName, summary, contact_information_id) VALUE (NOW(), NOW(), 'Java developer', 'Tom', 'Ford', 'Summary 1', 1);
