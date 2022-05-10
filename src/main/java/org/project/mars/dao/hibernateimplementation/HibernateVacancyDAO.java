@@ -44,4 +44,10 @@ public class HibernateVacancyDAO implements VacancyDAO {
         session.close();
         return foundVacancy.isPresent();
     }
+
+    @Override
+    public void delete(Vacancy vacancy) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(vacancy);
+    }
 }

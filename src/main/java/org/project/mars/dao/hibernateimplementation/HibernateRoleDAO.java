@@ -35,6 +35,12 @@ public class HibernateRoleDAO implements RoleDAO {
     }
 
     @Override
+    public void delete(Role role) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(role);;
+    }
+
+    @Override
     public Optional<Role> findByNameJoinUser(String name) {
         Session session = sessionFactory.openSession();
         Query<Role> namedQuery = session.createNamedQuery("Role.findByNameJoinUser", Role.class);

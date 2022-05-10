@@ -40,6 +40,12 @@ public class HibernateEmployerDAO implements EmployerDAO {
     }
 
     @Override
+    public void delete(Employer employer) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(employer);
+    }
+
+    @Override
     public Optional<Employer> findByEmail(String email) {
         Session session = sessionFactory.openSession();
         Query<Employer> namedQuery = session.createNamedQuery("Employer.findByEmail", Employer.class);

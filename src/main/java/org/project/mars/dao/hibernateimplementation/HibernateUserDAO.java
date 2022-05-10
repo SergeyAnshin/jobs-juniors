@@ -36,6 +36,12 @@ public class HibernateUserDAO implements UserDAO {
     }
 
     @Override
+    public void delete(User user) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(user);
+    }
+
+    @Override
     public Optional<User> findByIdJoinResume(long id) {
         Session session = sessionFactory.openSession();
         Query<User> namedQuery = session.createNamedQuery("User.findByIdJoinResume", User.class);

@@ -35,4 +35,10 @@ public class HibernateInternshipDAO implements InternshipDAO {
         session.close();
         return foundInternship.isPresent();
     }
+
+    @Override
+    public void delete(Internship internship) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(internship);
+    }
 }

@@ -36,6 +36,12 @@ public class HibernatePositionDAO implements PositionDAO {
     }
 
     @Override
+    public void delete(Position position) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(position);
+    }
+
+    @Override
     public List<Position> findAllByNameContainingIn(List<String> positionNames) {
         Session session = sessionFactory.openSession();
         Query<Position> namedQuery = session.createNamedQuery("Position.findAllByNameContainingIn", Position.class);
