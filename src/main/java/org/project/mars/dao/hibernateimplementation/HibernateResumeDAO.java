@@ -2,10 +2,14 @@ package org.project.mars.dao.hibernateimplementation;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.project.mars.dao.ResumeDAO;
 import org.project.mars.entity.Job;
 import org.project.mars.entity.Resume;
+import org.project.mars.entity.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class HibernateResumeDAO implements ResumeDAO {
@@ -45,5 +49,29 @@ public class HibernateResumeDAO implements ResumeDAO {
             session.close();
             return foundResume != null;
         }
+    }
+
+    @Override
+    public void delete(Resume resume) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(resume);
+    }
+
+    @Override
+    public List<Resume> findAllByUserId(long id) {
+        Session session = sessionFactory.openSession();
+        Query<Resume> namedQuery = session.createNamedQuery("Resume.findAllByUserId", Resume.class);
+        namedQuery.setParameter("userId", id);
+        List<Resume> resumes = namedQuery.list();
+        session.close();
+        return resumes;
+    }
+
+    @Override
+    public Resume findById(long resumeId) {
+        Session session = sessionFactory.openSession();
+        Resume resume = session.find(Resume.class, resumeId);
+        session.close();
+        return resume;
     }
 }
