@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row mb-3 mt-3">
+            <p class="text-danger text-center mb-3 mt-3" th:if="${error} != null" th:text="${error}">Error</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <form method="post" action="#" th:action="@{/account/signup/employer}" th:object="${employer}">
+
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="firstName" required
+                               th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'"
+                               th:field="*{firstName}">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('firstName')}"
+                             th:errors="*{firstName}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control " id="lastName" required
+                               th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'"
+                               th:field="*{lastName}">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('lastName')}"
+                             th:errors="*{lastName}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone number</label>
+                        <input type="text" class="form-control" id="phoneNumber" required
+                               th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                               th:field="*{phoneNumber}">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('phoneNumber')}"
+                             th:errors="*{phoneNumber}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
+                               th:field="*{email}">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('email')}"
+                             th:errors="*{email}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="companyName" class="form-label">Company name</label>
+                        <input type="text" class="form-control" id="companyName" required
+                               th:classappend="${#fields.hasErrors('companyName')} ? 'is-invalid'"
+                               th:field="*{companyName}">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('companyName')}"
+                             th:errors="*{companyName}">
+                        </div>
+                    </div>
+
+                    <div class="d-grid mb-3 text-center">
+                        <button type="submit" class="btn btn-primary">Sign up</button>
+                    </div>
+
+                    <div class="text-center">
+                        <span>Already registered? <a th:href="@{/account/login}">Login</a></span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+
+</body>
+</html>

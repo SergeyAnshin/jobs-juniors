@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Open source</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <div class="container">
+        <div class="row justify-content-center mt-3 gy-4">
+            <div class="col-7 shadow bg-light rounded" th:each="project : ${openSourceProjects}">
+                <dl >
+                    <dt class="text-break">Name:</dt>
+                    <dd class="text-break" th:text="${project.name}"></dd>
+
+                    <dt class="text-break">Description:</dt>
+                    <dd class="text-break" th:text="${project.description}"></dd>
+
+                    <dt class="text-break">Stack:</dt>
+                    <dd class="text-break" th:text="${project.stack}"></dd>
+
+                    <dt class="text-break">Link:</dt>
+                    <dd class="text-break" th:text="${project.link}"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+
+</body>
+</html>

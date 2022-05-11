@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>New vacancy</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <div class="container">
+
+        <div class="row mb-3 mt-3">
+            <p class="text-danger text-center mb-3 mt-3" th:if="${error} != null" th:text="${error}">Error</p>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-6">
+                <form action="#" th:action="@{/vacancy/create}" method="post" th:object="${vacancy}">
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="name" class="form-label">Name</label>
+                            <input class="form-control" type="text" id="name" th:field="*{name}"
+                                   placeholder="Junior java developer"
+                                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="salary" class="form-label">Salary</label>
+                            <input class="form-control" type="text" id="salary" th:field="*{salary}"
+                                   placeholder="400$"
+                                   th:classappend="${#fields.hasErrors('salary')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('salary')}"
+                                 th:errors="*{salary}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="requiredExperience" class="form-label">Required experience</label>
+                            <textarea class="form-control" id="requiredExperience" th:field="*{requiredExperience}" rows="1"
+                                      th:classappend="${#fields.hasErrors('requiredExperience')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('requiredExperience')}"
+                                 th:errors="*{requiredExperience}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="aboutCompany" class="form-label">About company</label>
+                            <textarea class="form-control" id="aboutCompany" th:field="*{aboutCompany}" rows="1"
+                                      th:classappend="${#fields.hasErrors('aboutCompany')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('aboutCompany')}"
+                                 th:errors="*{aboutCompany}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="aboutCustomer" class="form-label">About customer</label>
+                            <textarea class="form-control" id="aboutCustomer" th:field="*{aboutCustomer}" rows="1"
+                                      th:classappend="${#fields.hasErrors('aboutCustomer')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('aboutCustomer')}"
+                                 th:errors="*{aboutCustomer}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="aboutProject" class="form-label">About project</label>
+                            <textarea class="form-control" id="aboutProject" th:field="*{aboutProject}" rows="1"
+                                      th:classappend="${#fields.hasErrors('aboutProject')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('aboutProject')}"
+                                 th:errors="*{aboutProject}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="requirements" class="form-label">Requirements</label>
+                            <textarea class="form-control" id="requirements" th:field="*{requirements}" rows="1"
+                                      th:classappend="${#fields.hasErrors('requirements')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('requirements')}"
+                                 th:errors="*{requirements}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="niceToHave" class="form-label">Nice to have</label>
+                            <textarea class="form-control" id="niceToHave" th:field="*{niceToHave}" rows="1"
+                                      th:classappend="${#fields.hasErrors('niceToHave')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('niceToHave')}"
+                                 th:errors="*{niceToHave}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="responsibilities" class="form-label">Responsibilities</label>
+                            <textarea class="form-control" id="responsibilities" th:field="*{responsibilities}" rows="1"
+                                      th:classappend="${#fields.hasErrors('responsibilities')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('responsibilities')}"
+                                 th:errors="*{responsibilities}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label th:for="companyAdvantages" class="form-label">Company advantages</label>
+                            <textarea class="form-control" id="companyAdvantages" th:field="*{companyAdvantages}" rows="1"
+                                      th:classappend="${#fields.hasErrors('companyAdvantages')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('companyAdvantages')}"
+                                 th:errors="*{companyAdvantages}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label th:for="additionalInformation" class="form-label">Additional information</label>
+                            <textarea class="form-control" id="additionalInformation" th:field="*{additionalInformation}" rows="1"
+                                      th:classappend="${#fields.hasErrors('additionalInformation')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('additionalInformation')}"
+                                 th:errors="*{additionalInformation}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div th:each="option, rowStat : *{skillInformationList}">
+
+                                <div class="row mb-2 g-3">
+                                    <div class="col">
+                                        <label th:for="skillName" class="form-label">Skill</label>
+                                        <input class="form-control" type="text" id="skillName" th:field="*{skillInformationList[__${rowStat.index}__].name}"
+                                               th:classappend="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')} ? 'is-invalid'"/>
+                                        <div class="invalid-feedback"
+                                             th:if="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')}"
+                                             th:errors="*{skillInformationList[__${rowStat.index}__].name}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4 g-3">
+                                    <button class="btn btn-danger" type="submit" name="indexSkill" th:value="${rowStat.index}">Remove skill</button>
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-2 g-3">
+                                <button class="btn btn-secondary" type="submit" name="addSkill" value="true">Add skill</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary" name="save" th:value="true">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+<!--    <form action="#" th:action="@{/vacancy/create}" method="post" th:object="${vacancy}">-->
+
+<!--        <p th:if="${error} != null" th:text="${error}">Error</p>-->
+
+<!--        <label th:for="name">Name:</label>-->
+<!--        <input type="text" id="name" th:field="*{name}"/>-->
+<!--        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="salary">Salary:</label>-->
+<!--        <input type="text" id="salary" th:field="*{salary}"/>-->
+<!--        <p th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Incorrect salary</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="requiredExperience">Required experience:</label>-->
+<!--        <input type="text" id="requiredExperience" th:field="*{requiredExperience}"/>-->
+<!--        <p th:if="${#fields.hasErrors('requiredExperience')}" th:errors="*{requiredExperience}">Incorrect required experience</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="aboutCompany">About company:</label>-->
+<!--        <input type="text" id="aboutCompany" th:field="*{aboutCompany}"/>-->
+<!--        <p th:if="${#fields.hasErrors('aboutCompany')}" th:errors="*{aboutCompany}">Incorrect about company</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="aboutCustomer">About customer:</label>-->
+<!--        <input type="text" id="aboutCustomer" th:field="*{aboutCustomer}"/>-->
+<!--        <p th:if="${#fields.hasErrors('aboutCustomer')}" th:errors="*{aboutCustomer}">Incorrect about customer</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="aboutProject">About project:</label>-->
+<!--        <input type="text" id="aboutProject" th:field="*{aboutProject}"/>-->
+<!--        <p th:if="${#fields.hasErrors('aboutProject')}" th:errors="*{aboutProject}">Incorrect about project</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="requirements">Requirements:</label>-->
+<!--        <input type="text" id="requirements" th:field="*{requirements}"/>-->
+<!--        <p th:if="${#fields.hasErrors('requirements')}" th:errors="*{requirements}">Incorrect requirements</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="niceToHave">Nice to have:</label>-->
+<!--        <input type="text" id="niceToHave" th:field="*{niceToHave}"/>-->
+<!--        <p th:if="${#fields.hasErrors('niceToHave')}" th:errors="*{niceToHave}">Incorrect nice to have</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="responsibilities">Responsibilities:</label>-->
+<!--        <input type="text" id="responsibilities" th:field="*{responsibilities}"/>-->
+<!--        <p th:if="${#fields.hasErrors('responsibilities')}" th:errors="*{responsibilities}">Incorrect responsibilities</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="companyAdvantages">Company advantages:</label>-->
+<!--        <input type="text" id="companyAdvantages" th:field="*{companyAdvantages}"/>-->
+<!--        <p th:if="${#fields.hasErrors('companyAdvantages')}" th:errors="*{companyAdvantages}">Incorrect company advantages</p>-->
+<!--        <br><br>-->
+
+<!--        <label th:for="additionalInformation">Additional information:</label>-->
+<!--        <input type="text" id="additionalInformation" th:field="*{additionalInformation}"/>-->
+<!--        <p th:if="${#fields.hasErrors('additionalInformation')}" th:errors="*{additionalInformation}">Incorrect additional information</p>-->
+<!--        <br><br>-->
+
+<!--        <div th:each="option, rowStat : *{skillInformationList}">-->
+
+<!--            <label th:for="skillName">Name:</label>-->
+<!--            <input type="text" id="skillName" th:field="*{skillInformationList[__${rowStat.index}__].name}"/>-->
+<!--            <p th:if="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')}" th:errors="*{skillInformationList[__${rowStat.index}__].name">Incorrect skill name</p>-->
+<!--            <br><br>-->
+
+<!--            <button type="submit" name="indexSkill" th:value="${rowStat.index}">Remove skill</button>-->
+
+<!--        </div>-->
+
+<!--        <button type="submit" name="addSkill" value="true">Add skill</button>-->
+
+<!--        <button class="btn btn-primary" type="submit" name="save" th:value="true">Save</button>-->
+
+<!--    </form>-->
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+
+</body>
+</html>

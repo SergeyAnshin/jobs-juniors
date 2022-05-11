@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>New resume</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <div class="container">
+
+        <div class="row justify-content-center mt-3">
+
+            <div class="col-10">
+                <form action="#" th:action="@{/resume/create}" method="post" th:object="${resume}">
+
+                    <div class="accordion mb-3" id="accordionExample">
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    General information
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div class="row mb-4 g-3">
+                                        <div class="col">
+                                            <label th:for="firstName" class="form-label">First name</label>
+                                            <input class="form-control" type="text" id="firstName" th:field="*{firstName}"
+                                                   th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('firstName')}"
+                                                 th:errors="*{firstName}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label th:for="lastName" class="form-label">Last name</label>
+                                            <input class="form-control" type="text" id="lastName" th:field="*{lastName}"
+                                                   th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('lastName')}"
+                                                 th:errors="*{lastName}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label th:for="location" class="form-label">Location</label>
+                                            <input class="form-control" type="text" id="location" th:field="*{location}"
+                                                   th:classappend="${#fields.hasErrors('location')} ? 'is-invalid'"
+                                                   placeholder="Minsk"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('location')}"
+                                                 th:errors="*{location}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2 g-3">
+                                        <div class="col">
+                                            <label th:for="email" class="form-label">Email</label>
+                                            <input class="form-control" type="text" id="email" th:field="*{email}"
+                                                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('email')}"
+                                                 th:errors="*{email}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label th:for="telegramLink" class="form-label">Telegram</label>
+                                            <input class="form-control" type="text" id="telegramLink" th:field="*{telegramLink}"
+                                                   th:classappend="${#fields.hasErrors('telegramLink')} ? 'is-invalid'"
+                                                   placeholder="t.me/spock"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('telegramLink')}"
+                                                 th:errors="*{telegramLink}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label th:for="phoneNumber" class="form-label">Phone number</label>
+                                            <input class="form-control" type="text" id="phoneNumber" th:field="*{phoneNumber}"
+                                                   th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                                                   placeholder="+375 (33) 937-99-92"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('phoneNumber')}"
+                                                 th:errors="*{phoneNumber}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4 g-3">
+                                        <div class="col">
+                                            <label th:for="linkedinLink" class="form-label">LinkedIn</label>
+                                            <input class="form-control" type="text" id="linkedinLink" th:field="*{linkedinLink}"
+                                                   th:classappend="${#fields.hasErrors('linkedinLink')} ? 'is-invalid'"
+                                                   placeholder="linkedin.com/in/ivan-andreev"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('linkedinLink')}"
+                                                 th:errors="*{linkedinLink}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label th:for="githubLink" class="form-label">GitHub</label>
+                                            <input class="form-control" type="text" id="githubLink" th:field="*{githubLink}"
+                                                   th:classappend="${#fields.hasErrors('githubLink')} ? 'is-invalid'"
+                                                   placeholder="github.com/SashaGrey"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('githubLink')}"
+                                                 th:errors="*{githubLink}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2 g-3">
+                                        <div class="col">
+                                            <label th:for="desiredPosition" class="form-label">Desired position</label>
+                                            <input class="form-control" type="text" id="desiredPosition" th:field="*{desiredPosition}"
+                                                   th:classappend="${#fields.hasErrors('desiredPosition')} ? 'is-invalid'" placeholder="Java developer"/>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('desiredPosition')}"
+                                                 th:errors="*{desiredPosition}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2 g-3">
+                                        <div class="col">
+                                            <label th:for="summary" class="form-label">Summary</label>
+                                            <textarea class="form-control" type="text" id="summary" th:field="*{summary}" rows="3" th:classappend="${#fields.hasErrors('summary')} ? 'is-invalid'"></textarea>
+                                            <div class="invalid-feedback"
+                                                 th:if="${#fields.hasErrors('summary')}"
+                                                 th:errors="*{summary}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Work experience
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div th:each="option, rowStat : *{jobs}">
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="companyName" class="form-label">Company</label>
+                                                <input class="form-control" type="text" id="companyName" th:field="*{jobs[__${rowStat.index}__].companyName}"
+                                                       th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].companyName')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].companyName')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].companyName}">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label th:for="companySite" class="form-label">Site</label>
+                                                <input class="form-control"  type="text" id="companySite" th:field="*{jobs[__${rowStat.index}__].companySite}"
+                                                       th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].companySite')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].companySite')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].companySite}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="positionName" class="form-label">Position</label>
+                                                <input class="form-control" type="text" id="positionName" th:field="*{jobs[__${rowStat.index}__].positionName}"
+                                                       th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].positionName')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].positionName')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].positionName}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="employmentDate" class="form-label">Employment date</label>
+                                                <input class="form-control" type="date" id="employmentDate" th:field="*{jobs[__${rowStat.index}__].employmentDate}"
+                                                       th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].employmentDate')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].employmentDate')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].employmentDate}">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label th:for="dismissalDate" class="form-label">Dismissal date</label>
+                                                <input class="form-control" type="date" id="dismissalDate" th:field="*{jobs[__${rowStat.index}__].dismissalDate}"
+                                                       th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].dismissalDate')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].dismissalDate')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].dismissalDate}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="jobResponsibilities" class="form-label">Job responsibilities</label>
+                                                <textarea class="form-control" id="jobResponsibilities" th:field="*{jobs[__${rowStat.index}__].jobResponsibilities}" rows="3"
+                                                          th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].jobResponsibilities')} ? 'is-invalid'"></textarea>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].jobResponsibilities')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].jobResponsibilities}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="jobAchievements" class="form-label">Job achievements</label>
+                                                <textarea class="form-control" id="jobAchievements" th:field="*{jobs[__${rowStat.index}__].jobAchievements}" rows="3"
+                                                          th:classappend="${#fields.hasErrors('jobs[__${rowStat.index}__].jobAchievements')} ? 'is-invalid'"></textarea>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('jobs[__${rowStat.index}__].jobAchievements')}"
+                                                     th:errors="*{jobs[__${rowStat.index}__].jobAchievements}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4 g-3">
+                                            <button class="btn btn-danger" type="submit" name="indexJobInformation" th:value="${rowStat.index}">Remove job</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-2 g-3">
+                                        <button class="btn btn-secondary" type="submit" name="addJobInformation" value="true">Add job</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Projects
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div th:each="option, rowStat : *{projectInformationList}">
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="name" class="form-label">Name</label>
+                                                <input class="form-control" type="text" id="name" th:field="*{projectInformationList[__${rowStat.index}__].name}"
+                                                       th:classappend="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].name')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].name')}"
+                                                     th:errors="*{projectInformationList[__${rowStat.index}__].name}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="description" th:field="*{projectInformationList[__${rowStat.index}__].description}" rows="2"
+                                                          th:classappend="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].description')} ? 'is-invalid'"></textarea>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].description')}"
+                                                     th:errors="*{projectInformationList[__${rowStat.index}__].description}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="tasks" class="form-label">Tasks</label>
+                                                <textarea class="form-control" id="tasks" th:field="*{projectInformationList[__${rowStat.index}__].tasks}" rows="2"
+                                                          th:classappend="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].tasks')} ? 'is-invalid'"></textarea>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].tasks')}"
+                                                     th:errors="*{projectInformationList[__${rowStat.index}__].tasks}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="stack" class="form-label">Stack</label>
+                                                <textarea class="form-control" id="stack" th:field="*{projectInformationList[__${rowStat.index}__].stack}" rows="2"
+                                                          th:classappend="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].stack')} ? 'is-invalid'"></textarea>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].stack')}"
+                                                     th:errors="*{projectInformationList[__${rowStat.index}__].stack}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="link" class="form-label">Link</label>
+                                                <input class="form-control" type="text" id="link" th:field="*{projectInformationList[__${rowStat.index}__].link}"
+                                                       th:classappend="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].link')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('projectInformationList[__${rowStat.index}__].link')}"
+                                                     th:errors="*{projectInformationList[__${rowStat.index}__].link}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="openSource" th:field="*{projectInformationList[__${rowStat.index}__].openSource}">
+                                                    <label class="form-check-label" for="openSource">Open source</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4 g-3">
+                                            <button class="btn btn-danger" type="submit" name="indexProject" th:value="${rowStat.index}">Remove project</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2 g-3">
+                                        <button class="btn btn-secondary" type="submit" name="addProject" value="true">Add project</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Education
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div th:each="option, rowStat : *{educationInformationList}">
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="educationalInstitution" class="form-label">Educational institution</label>
+                                                <input class="form-control" type="text" id="educationalInstitution" th:field="*{educationInformationList[__${rowStat.index}__].educationalInstitution}"
+                                                       th:classappend="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].educationalInstitution')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].educationalInstitution')}"
+                                                     th:errors="*{educationInformationList[__${rowStat.index}__].educationalInstitution}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="faculty" class="form-label">Faculty</label>
+                                                <input class="form-control" type="text" id="faculty" th:field="*{educationInformationList[__${rowStat.index}__].faculty}"
+                                                       th:classappend="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].faculty')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].faculty')}"
+                                                     th:errors="*{educationInformationList[__${rowStat.index}__].faculty}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="specialization" class="form-label">Specialization</label>
+                                                <input class="form-control" type="text" id="specialization" th:field="*{educationInformationList[__${rowStat.index}__].specialization}"
+                                                       th:classappend="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].specialization')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].specialization')}"
+                                                     th:errors="*{educationInformationList[__${rowStat.index}__].specialization}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="enrollmentDate" class="form-label">Enrollment date</label>
+                                                <input class="form-control" type="date" id="enrollmentDate" th:field="*{educationInformationList[__${rowStat.index}__].enrollmentDate}"
+                                                       th:classappend="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].enrollmentDate')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].enrollmentDate')}"
+                                                     th:errors="*{educationInformationList[__${rowStat.index}__].enrollmentDate}">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <label th:for="graduationDate" class="form-label">Graduation date</label>
+                                                <input class="form-control" type="date" id="graduationDate" th:field="*{educationInformationList[__${rowStat.index}__].graduationDate}"
+                                                       th:classappend="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].graduationDate')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('educationInformationList[__${rowStat.index}__].graduationDate')}"
+                                                     th:errors="*{educationInformationList[__${rowStat.index}__].graduationDate}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4 g-3">
+                                            <button class="btn btn-danger" type="submit" name="indexEducation" th:value="${rowStat.index}">Remove education</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-2 g-3">
+                                        <button class="btn btn-secondary" type="submit" name="addEducation" value="true">Add education</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Courses
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div th:each="option, rowStat : *{courseInformationList}">
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="courseName" class="form-label">Name</label>
+                                                <input class="form-control" type="text" id="courseName" th:field="*{courseInformationList[__${rowStat.index}__].name}"
+                                                       th:classappend="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].name')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].name')}"
+                                                     th:errors="*{courseInformationList[__${rowStat.index}__].name}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="courseOwner" class="form-label">Course owner</label>
+                                                <input class="form-control" type="text" id="courseOwner" th:field="*{courseInformationList[__${rowStat.index}__].courseOwner}"
+                                                       th:classappend="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseOwner')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseOwner')}"
+                                                     th:errors="*{courseInformationList[__${rowStat.index}__].courseOwner}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="courseLink" class="form-label">Link</label>
+                                                <input class="form-control" type="text" id="courseLink" th:field="*{courseInformationList[__${rowStat.index}__].courseLink}"
+                                                       th:classappend="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseLink')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('courseInformationList[__${rowStat.index}__].courseLink')}"
+                                                     th:errors="*{courseInformationList[__${rowStat.index}__].courseLink}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4 g-3">
+                                            <button class="btn btn-danger" type="submit" name="indexCourse" th:value="${rowStat.index}">Remove course</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2 g-3">
+                                        <button class="btn btn-secondary" type="submit" name="addCourse" value="true">Add course</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Skills
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+                                    <div th:each="option, rowStat : *{skillInformationList}">
+
+                                        <div class="row mb-2 g-3">
+                                            <div class="col">
+                                                <label th:for="skillName" class="form-label">Name</label>
+                                                <input class="form-control" type="text" id="skillName" th:field="*{skillInformationList[__${rowStat.index}__].name}"
+                                                       th:classappend="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')} ? 'is-invalid'"/>
+                                                <div class="invalid-feedback"
+                                                     th:if="${#fields.hasErrors('skillInformationList[__${rowStat.index}__].name')}"
+                                                     th:errors="*{skillInformationList[__${rowStat.index}__].name}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4 g-3">
+                                            <button class="btn btn-danger" type="submit" name="indexSkill" th:value="${rowStat.index}">Remove skill</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mb-2 g-3">
+                                        <button class="btn btn-secondary" type="submit" name="addSkill" value="true">Add skill</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary" type="submit" name="save" th:value="true">Save</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+</body>
+</html>
