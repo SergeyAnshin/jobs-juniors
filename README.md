@@ -17,7 +17,7 @@ Web application that allows juniors and employers to find each other. For employ
 * Tomcat DBCP
 * Hibernate Validator Engine
 * Thymeleaf
-* slf4j + log4j
+* SLF4j + log4j
 * JUnit 5
 * String Test
 * Lombok
@@ -25,9 +25,11 @@ Web application that allows juniors and employers to find each other. For employ
 ## Features
 
 * User and employer registration, authentication and authorization
-* Create resume
-* Create internship
+* Create resume, internship, vacancy
 * View open source project
+* View resume
+* Delete resume
+* Edit resume
 
 # Installation
 
