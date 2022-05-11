@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Edit menu</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <div class="container mt-3">
+        <div class="row row-cols-2 row-cols-2 g-2 justify-content-center">
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/general-information(id=${param.id})}" class="stretched-link text-white text-decoration-none">General information</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/work-experience(id=${param.id})}" class="stretched-link text-white text-decoration-none">Work experience</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/projects(id=${param.id})}" class="stretched-link text-white text-decoration-none">Projects</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/education(id=${param.id})}" class="stretched-link text-white text-decoration-none">Education</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/courses(id=${param.id})}" class="stretched-link text-white text-decoration-none">Courses</a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-3 rounded bg-primary text-white bg-opacity-75 text-wrap text-center" style="transform: rotate(0);">
+                    <a th:href="@{/resume/edit/skills(id=${param.id})}" class="stretched-link text-white text-decoration-none">Skills</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+</body>
+</html>

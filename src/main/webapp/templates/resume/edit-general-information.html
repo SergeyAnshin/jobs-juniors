@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link th:insert="fragment/bootstrap.html :: style">
+    <meta charset="UTF-8">
+    <title>Edit general information</title>
+</head>
+<body>
+
+    <header th:insert="fragment/header.html :: header">Header</header>
+
+    <div class="container">
+
+        <div class="row mb-3 mt-3 justify-content-center">
+            <div class="col-10">
+                <div th:if="${successfulUpdate != null}" th:text="${successfulUpdate}" class="alert alert-success" role="alert">Successful update</div>
+                <div th:if="${error} != null" th:text="${error}" class="alert alert-danger" role="alert">Error</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <form action="#" th:action="@{/resume/edit/general-information}" method="post" th:object="${generalInformationDetails}">
+
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{contactId}">
+
+                    <div class="row mb-4 g-3">
+                        <div class="col">
+                            <label th:for="firstName" class="form-label">First name</label>
+                            <input class="form-control" type="text" id="firstName" th:field="*{firstName}"
+                                   th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('firstName')}"
+                                 th:errors="*{firstName}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label th:for="lastName" class="form-label">Last name</label>
+                            <input class="form-control" type="text" id="lastName" th:field="*{lastName}"
+                                   th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('lastName')}"
+                                 th:errors="*{lastName}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label th:for="location" class="form-label">Location</label>
+                            <input class="form-control" type="text" id="location" th:field="*{location}"
+                                   th:classappend="${#fields.hasErrors('location')} ? 'is-invalid'"
+                                   placeholder="Minsk"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('location')}"
+                                 th:errors="*{location}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 g-3">
+                        <div class="col">
+                            <label th:for="email" class="form-label">Email</label>
+                            <input class="form-control" type="text" id="email" th:field="*{email}"
+                                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label th:for="telegramLink" class="form-label">Telegram</label>
+                            <input class="form-control" type="text" id="telegramLink" th:field="*{telegramLink}"
+                                   th:classappend="${#fields.hasErrors('telegramLink')} ? 'is-invalid'"
+                                   placeholder="t.me/spock"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('telegramLink')}"
+                                 th:errors="*{telegramLink}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label th:for="phoneNumber" class="form-label">Phone number</label>
+                            <input class="form-control" type="text" id="phoneNumber" th:field="*{phoneNumber}"
+                                   th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                                   placeholder="+375 (33) 937-99-92"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('phoneNumber')}"
+                                 th:errors="*{phoneNumber}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4 g-3">
+                        <div class="col">
+                            <label th:for="linkedinLink" class="form-label">LinkedIn</label>
+                            <input class="form-control" type="text" id="linkedinLink" th:field="*{linkedinLink}"
+                                   th:classappend="${#fields.hasErrors('linkedinLink')} ? 'is-invalid'"
+                                   placeholder="linkedin.com/in/ivan-andreev"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('linkedinLink')}"
+                                 th:errors="*{linkedinLink}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label th:for="githubLink" class="form-label">GitHub</label>
+                            <input class="form-control" type="text" id="githubLink" th:field="*{githubLink}"
+                                   th:classappend="${#fields.hasErrors('githubLink')} ? 'is-invalid'"
+                                   placeholder="github.com/SashaGrey"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('githubLink')}"
+                                 th:errors="*{githubLink}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 g-3">
+                        <div class="col">
+                            <label th:for="desiredPosition" class="form-label">Desired position</label>
+                            <input class="form-control" type="text" id="desiredPosition" th:field="*{desiredPosition}"
+                                   th:classappend="${#fields.hasErrors('desiredPosition')} ? 'is-invalid'" placeholder="Java developer"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('desiredPosition')}"
+                                 th:errors="*{desiredPosition}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 g-3">
+                        <div class="col">
+                            <label th:for="summary" class="form-label">Summary</label>
+                            <textarea class="form-control" type="text" id="summary" th:field="*{summary}" rows="3" th:classappend="${#fields.hasErrors('summary')} ? 'is-invalid'"></textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('summary')}"
+                                 th:errors="*{summary}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="fragment/bootstrap.html :: script"></div>
+</body>
+</html>
