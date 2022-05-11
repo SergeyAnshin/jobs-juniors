@@ -7,9 +7,9 @@ import org.project.mars.mapper.ProjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -22,7 +22,9 @@ public class ProjectService {
 
     public Set<OpenSourceProject> getOpenSourceProjects() {
         List<Project> projects = projectDAO.findAllByOpenSource();
-        Set<OpenSourceProject> openSourceProjects = ProjectMapper.mapToOpenSourceProjectSet(projects);
+        Map<String, Project> uniqueProjects = projects.stream()
+                .collect(Collectors.toMap(Project::getLink, Function.identity(), (existingProject, newProject) -> existingProject));
+        Set<OpenSourceProject> openSourceProjects = ProjectMapper.mapToOpenSourceProjectSet(new ArrayList<>(uniqueProjects.values()));
         return openSourceProjects == null ? Collections.emptySet() : openSourceProjects;
     }
 }

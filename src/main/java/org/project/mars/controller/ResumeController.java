@@ -2,29 +2,45 @@ package org.project.mars.controller;
 
 import org.project.mars.dto.*;
 import org.project.mars.entity.User;
+import org.project.mars.service.AccountService;
+import org.project.mars.service.GeneralInformationService;
 import org.project.mars.service.ResumeService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
+
+import static org.project.mars.controller.ExceptionHandlerController.ATTRIBUTE_ERROR;
 
 @Controller
 @RequestMapping("/resume")
 public class ResumeController {
     public static final String ATTRIBUTE_RESUME = "resume";
+    public static final String ATTRIBUTE_RESUMES = "resumes";
+    public static final String ATTRIBUTE_GENERAL_INFORMATION_DETAILS = "generalInformationDetails";
+    public static final String ATTRIBUTE_SUCCESSFUL_UPDATE = "successfulUpdate";
     public static final String PATH_CREATE_RESUME_TEMPLATE = "resume/create";
+    public static final String PATH_RESUME_EDIT_MENU_TEMPLATE = "resume/edit-menu";
+    public static final String PATH_EDIT_GENERAL_INFORMATION_TEMPLATE = "resume/edit-general-information";
     public static final String PATH_MY_RESUME_TEMPLATE = "resume/my-resume";
     public static final String REDIRECT_TO_HOME_PAGE = "redirect:/";
+    public static final String REDIRECT_TO_RESUME_PAGE = "redirect:/resume";
     private final ResumeService resumeService;
+    private final GeneralInformationService generalInformationService;
 
-    public ResumeController(ResumeService resumeService) {
+    public ResumeController(ResumeService resumeService, GeneralInformationService generalInformationService) {
         this.resumeService = resumeService;
+        this.generalInformationService = generalInformationService;
     }
 
     @GetMapping
-    public String getMyResumeTemplate() {
+    public String getMyResumeTemplate(Model model) {
+        User user = AccountService.getUserFromSecurityContext();
+        model.addAttribute(ATTRIBUTE_RESUMES, resumeService.findAllByUser(user));
         return PATH_MY_RESUME_TEMPLATE;
     }
 
@@ -53,7 +69,7 @@ public class ResumeController {
                 resumeDTO.setOwnerId(user.getId());
                 System.out.println(user.getId());
                 resumeService.save(resumeDTO);
-                return REDIRECT_TO_HOME_PAGE;
+                return REDIRECT_TO_RESUME_PAGE;
             }
         }
         if (addJobInformation) {
@@ -87,5 +103,39 @@ public class ResumeController {
             resumeDTO.getSkillInformationList().remove(Integer.parseInt(indexSkill));
         }
         return PATH_CREATE_RESUME_TEMPLATE;
+    }
+
+    @PostMapping("/delete")
+    public String deleteResume(@RequestParam long resumeId) {
+        resumeService.deleteById(resumeId);
+        return REDIRECT_TO_RESUME_PAGE;
+    }
+
+    @GetMapping("/edit-menu")
+    public String getResumeEditMenuTemplate() {
+        return PATH_RESUME_EDIT_MENU_TEMPLATE;
+    }
+
+    @GetMapping("/edit/general-information")
+    public String getEditGeneralInformationTemplate(Model model, @RequestParam long id) {
+        Optional<GeneralInformationDetails> generalInfoDetails = generalInformationService.getGeneralInformationDetailsByResumeId(id);
+        generalInfoDetails.ifPresent(generalInformationDetails -> model.addAttribute(ATTRIBUTE_GENERAL_INFORMATION_DETAILS, generalInformationDetails));
+        return PATH_EDIT_GENERAL_INFORMATION_TEMPLATE;
+    }
+
+    @PostMapping("/edit/general-information")
+    public String editGeneralInformation(@ModelAttribute(ATTRIBUTE_GENERAL_INFORMATION_DETAILS) @Valid GeneralInformationDetails generalInformationDetails,
+                                         BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return PATH_EDIT_GENERAL_INFORMATION_TEMPLATE;
+        } else {
+            if (generalInformationService.update(generalInformationDetails)) {
+                model.addAttribute(ATTRIBUTE_SUCCESSFUL_UPDATE, "General information updated!");
+                return PATH_EDIT_GENERAL_INFORMATION_TEMPLATE;
+            } else {
+                model.addAttribute(ATTRIBUTE_ERROR, "Failed to update!");
+                return PATH_EDIT_GENERAL_INFORMATION_TEMPLATE;
+            }
+        }
     }
 }

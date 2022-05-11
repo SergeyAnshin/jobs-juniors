@@ -9,17 +9,22 @@ import org.project.mars.hibernatelistener.GeneralCreateUpdateListener;
 
 import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = "GeneralInformation.findByResumeIdJoinContact",
+                query = "SELECT gi FROM GeneralInformation gi JOIN FETCH gi.contactInformation INNER JOIN Resume r ON gi.id = r.generalInformation.id WHERE r.id = :id")
+})
+
 @Entity
 @EntityListeners(GeneralCreateUpdateListener.class)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor()
 @SuperBuilder
 @EqualsAndHashCode(callSuper = false)
 public class GeneralInformation extends BusinessEntity {
     private String firstName;
     private String lastName;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "contact_information_id")
     private ContactInformation contactInformation;
     private String desiredPosition;

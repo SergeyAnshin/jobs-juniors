@@ -49,4 +49,13 @@ public class ResumeService {
         owner.ifPresent(user -> user.addResume(resume));
         resumeDAO.save(resume);
     }
+
+    public List<Resume> findAllByUser(User user) {
+        return resumeDAO.findAllByUserId(user.getId());
+    }
+
+    public void deleteById(long resumeId) {
+        Resume resume = resumeDAO.findById(resumeId);
+        resumeDAO.delete(resume);
+    }
 }

@@ -36,6 +36,12 @@ public class HibernateSkillDAO implements SkillDAO {
     }
 
     @Override
+    public void delete(Skill skill) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(skill);
+    }
+
+    @Override
     public List<Skill> findAllByNameContainingIn(List<String> skillNames) {
         Session session = sessionFactory.openSession();
         Query<Skill> namedQuery = session.createNamedQuery("Skill.findAllByNameContainingIn", Skill.class);

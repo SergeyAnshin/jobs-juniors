@@ -37,6 +37,12 @@ public class HibernateProjectDAO implements ProjectDAO {
     }
 
     @Override
+    public void delete(Project project) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(project);
+    }
+
+    @Override
     public List<Project> findAllByOpenSource() {
         Session session = sessionFactory.openSession();
         Query<Project> namedQuery = session.createNamedQuery("Project.findAllByOpenSource", Project.class);

@@ -36,6 +36,12 @@ public class HibernateCompanyDAO implements CompanyDAO {
     }
 
     @Override
+    public void delete(Company company) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(company);
+    }
+
+    @Override
     public List<Company> findAllByNameContainingIn(List<String> companyNames) {
         Session session = sessionFactory.openSession();
         Query<Company> namedQuery = session.createNamedQuery("Company.findAllByNameContainingIn", Company.class);
